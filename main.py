@@ -1,4 +1,6 @@
 import request
+
+
 # Ерченко Кристина, 15-я когорта — Финальный проект. Инженер по тестированию плюс
 def in_autotests_we_trust(a, b):
     if a == b:
@@ -6,8 +8,8 @@ def in_autotests_we_trust(a, b):
     else:
         print('Тест провален')
 
-order = request.get_order()
-s = str(order)
-track = request.order_by_track(s)
-code = track.status_code
-in_autotests_we_trust(code, 200)
+
+create_order_response = request.create_order()
+track_id = str(create_order_response.json()["track"])
+order_response = request.order_by_track(track_id)
+in_autotests_we_trust(order_response.status_code, 200)
